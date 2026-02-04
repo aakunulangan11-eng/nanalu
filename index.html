@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Special for D'Luna Syahputri ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-pink: #ff85a1;
+            --soft-pink: #fbb1bd;
+            --dark-pink: #ff4d6d;
+            --bg-color: #fff0f3;
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            font-family: 'Quicksand', sans-serif;
+            background: var(--bg-color);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            /* Menghindari delay klik di iOS */
+            touch-action: manipulation;
+        }
+
+        /* Sakura & Heart Rain */
+        .sakura {
+            position: fixed; top: -10%;
+            color: var(--primary-pink);
+            font-size: 1.2rem;
+            z-index: 999;
+            user-select: none;
+            pointer-events: none;
+            animation: fall linear forwards;
+        }
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+
+        /* General Layout */
+        .page {
+            min-height: 100vh;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+            box-sizing: border-box; /* Sangat penting untuk mobile */
+        }
+        .active { display: flex; animation: fadeIn 0.8s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .btn {
+            background: var(--dark-pink); color: white; border: none;
+            padding: 14px 30px; border-radius: 25px; font-size: 1rem;
+            cursor: pointer; box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+            transition: 0.3s; margin-top: 15px; text-decoration: none;
+            font-weight: bold; width: 80%; max-width: 300px; /* Lebar tombol adaptif */
+        }
+        .btn:active { transform: scale(0.95); } /* Feedback saat ditekan di HP */
+
+        .profile-pic {
+            width: 140px; height: 140px; border-radius: 50%;
+            border: 5px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            object-fit: cover; margin-bottom: 20px;
+        }
+
+        .card-ucapan {
+            background: white; padding: 20px; border-radius: 20px; 
+            width: 90%; max-width: 500px; border-left: 6px solid var(--dark-pink);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            text-align: justify; line-height: 1.6; font-size: 0.9rem;
+            box-sizing: border-box;
+        }
+
+        /* Envelope */
+        .envelope-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 20px 0; width: 100%; }
+        .envelope {
+            background: var(--primary-pink); color: white;
+            padding: 20px; border-radius: 12px; cursor: pointer;
+            transition: 0.3s; font-size: 1.5rem; flex: 0 0 70px; /* Ukuran pas di HP */
+        }
+
+        /* Wishlist */
+        .wishlist-box {
+            background: white; padding: 20px; border-radius: 15px;
+            width: 90%; max-width: 400px; text-align: left;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            box-sizing: border-box;
+        }
+        .wishlist-item { margin: 15px 0; display: flex; align-items: center; font-size: 0.9rem; }
+        .wishlist-item input { margin-right: 12px; width: 20px; height: 20px; flex-shrink: 0; }
+
+        /* Mood */
+        .mood-btn { font-size: 2.5rem; cursor: pointer; transition: 0.3s; margin: 10px; display: inline-block; }
+
+        /* Photo Book - Diperkecil agar masuk layar HP */
+        .book-container { perspective: 1000px; width: 180px; height: 250px; position: relative; cursor: pointer; margin: 20px 0; }
+        .page-book { width: 100%; height: 100%; position: absolute; transition: transform 1s; transform-origin: left; transform-style: preserve-3d; }
+        .page-book img { width: 100%; height: 100%; border-radius: 10px; object-fit: cover; border: 3px solid white; box-sizing: border-box; }
+        .flipped { transform: rotateY(-180deg); }
+
+        /* Moment Slider */
+        .slider-container { 
+            display: flex; overflow-x: auto; gap: 12px; width: 100%; 
+            padding: 10px 20px; box-sizing: border-box;
+            -webkit-overflow-scrolling: touch; /* Smooth scroll di iOS */
+            scrollbar-width: none; 
+        }
+        .slider-container::-webkit-scrollbar { display: none; }
+        .slider-container img { width: 180px; height: 250px; border-radius: 15px; flex-shrink: 0; object-fit: cover; border: 3px solid white; }
+
+        /* Input Password Mobile */
+        #password {
+            width: 80%; max-width: 250px; padding: 12px; border-radius: 10px; 
+            border: 2px solid var(--soft-pink); text-align: center; 
+            outline: none; font-size: 1.1rem; appearance: none;
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="myAudio" loop>
+        <source src="khusus luna/about.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="p1" class="page active">
+        <img src="khusus luna/awal.jpg" alt="Luna" class="profile-pic">
+        <h1 style="font-family: 'Pacifico'; color: var(--dark-pink); margin: 0 0 10px 0; font-size: 1.8rem;">D'Luna Syahputri</h1>
+        <div class="login-box" style="width: 100%;">
+            <p>Masukkan tanggal jadian kita ❤️<br><small>(DDMMYYYY)</small></p>
+            <input type="number" pattern="\d*" inputmode="numeric" id="password" placeholder="Hayo Tebak">
+            <br>
+            <button class="btn" onclick="checkLogin()">Buka Kado Dari Aku 🎁</button>
+        </div>
+    </div>
+
+    <div id="p2" class="page">
+        <div class="card-ucapan">
+            <div id="time-together" style="font-size: 0.8rem; margin-bottom: 10px; text-align: center; font-weight: bold; color: var(--dark-pink);"></div>
+            <h2 style="font-family: 'Dancing Script'; color: var(--dark-pink); text-align: center; margin-top:0;">Happy Birthday Sayang!</h2>
+            <p>
+                Selamat ulang tahun ya my princess, hari ini adalah hari yang spesial banget buat kamu, karena apa? yap benar, karena hari ini adalah hari ulang tahun kamu...
+                <br><br>hari ini umur kamu bertambah 1 tahun menjadi berapa hayooo, 1000 tahun atau 7000 tahun?
+                <br><br>eummmmmmm, bercanda bercanda, tepat pada hari ini pukul 00.00, umur kamu bertambah menjadi 16 tahun. tenang walaupun umur kamu bertambah, kamu teteppp cantikk banget di mata akuu.
+                <br><br>aku bakalan janji akuu akan selalu sayang sama kamu dan akuu juga janji ga akan ninggalin kamu sampai kapan pun.
+                <br><br>makasih banget yaa sayang udah mau temenin akuu sampai detik ini. walaupun orangnya agak tengil sii dan mental sosmed heheheh, tapi aku bangga bangett punya pacar kaya kamuu. I Loveee youuu lunaaaaaa. ❤️
+            </p>
+        </div>
+        <button class="btn" onclick="nextPage(3)">Ke Amplop Rahasia &rarr;</button>
+    </div>
+
+    <div id="p3" class="page">
+        <h2 style="font-family: 'Dancing Script'; color: var(--dark-pink); font-size: 1.8rem;">Alasan Aku Sayang Kamu</h2>
+        <div class="envelope-container">
+            <div class="envelope" onclick="openMsg('Kamu itu satu-satunya orang yang bisa bikin aku senyum tiap hari!')">✉️</div>
+            <div class="envelope" onclick="openMsg('Aku sayang banget sama cara kamu manggil nama aku.')">✉️</div>
+            <div class="envelope" onclick="openMsg('Walaupun tengil, tapi kamu yang paling ngerti aku!')">✉️</div>
+            <div class="envelope" onclick="openMsg('Aku beruntung banget bisa milikin kamu, Luna.')">✉️</div>
+        </div>
+        <hr style="width: 60%; border: 0.5px solid var(--soft-pink); margin: 20px 0;">
+        <p>Gimana perasaan kamu hari ini?</p>
+        <div class="mood-container">
+            <div class="mood-btn" onclick="mood('Senang')">😊</div>
+            <div class="mood-btn" onclick="mood('Sedih')">😢</div>
+            <div class="mood-btn" onclick="mood('Kangen')">😍</div>
+        </div>
+        <button class="btn" onclick="nextPage(4)">Lihat Foto Kita &rarr;</button>
+    </div>
+
+    <div id="p4" class="page">
+        <h2 style="font-family: 'Pacifico'; color: var(--dark-pink); font-size: 1.5rem;">Momen Terindah Kita</h2>
+        <div class="slider-container">
+            <img src="khusus luna/album1.jpg">
+            <img src="khusus luna/album2.jpg">
+            <img src="khusus luna/album3.jpg">
+            <img src="khusus luna/album4.jpg">
+        </div>
+        <p style="font-size: 0.8rem;"><i>Geser ke samping ya &rarr;</i></p>
+        <button class="btn" onclick="nextPage(5)">Album Kenangan &rarr;</button>
+    </div>
+
+    <div id="p5" class="page">
+        <h2 style="font-family: 'Dancing Script'; font-size: 1.8rem;">Album Spesial</h2>
+        <div class="book-container" onclick="flipPage()">
+            <div class="page-book" id="book-p4"><img src="khusus luna/album5.jpg"></div>
+            <div class="page-book" id="book-p3"><img src="khusus luna/album6.jpg"></div>
+            <div class="page-book" id="book-p2"><img src="khusus luna/album7.jpg"></div>
+            <div class="page-book" id="book-p1"><img src="khusus luna/album8.jpg"></div>
+        </div>
+        <p style="font-size: 0.9rem;">Klik halaman bukunya!</p>
+    </div>
+
+    <div id="p6" class="page">
+        <h2 style="font-family: 'Pacifico'; font-size: 1.5rem;">Our Future Goals</h2>
+        <div class="wishlist-box">
+            <div class="wishlist-item"><input type="checkbox"> Nonton bioskop bareng Luna</div>
+            <div class="wishlist-item"><input type="checkbox"> Jalan-jalan cari makanan enak</div>
+            <div class="wishlist-item"><input type="checkbox"> Foto box bareng</div>
+            <div class="wishlist-item"><input type="checkbox"> Rayain ultah bareng setiap tahun</div>
+        </div>
+        <button class="btn" onclick="startPuzzle()">Main Puzzle Foto &rarr;</button>
+    </div>
+
+    <div id="p7" class="page">
+        <h2 style="font-family: 'Dancing Script'; font-size: 1.8rem;">Coming Soon Anniversary</h2>
+        <div id="countdown" style="font-size: 1.2rem; margin-bottom: 20px; color: var(--dark-pink); font-weight: bold;"></div>
+        <h1 style="font-family: 'Pacifico'; font-size: 1.5rem; color: var(--dark-pink); padding: 0 10px;">
+            Selamattt ulangg tahunnn sayanggg, I Loveee youuuuuu.
+        </h1>
+        <a href="https://wa.me/089521626891?text=Sayanggg, aku udah liat semuanya! Makasih banyak yaaa websitenya bagus banget. I Love You Too! ❤️" class="btn" style="background: #25d366; width: 85%;">
+            <i class="fab fa-whatsapp"></i> Balas ke WhatsApp
+        </a>
+    </div>
+
+    <script>
+        // Sakura Effect
+        function createSakura() {
+            const icons = ['🌸', '❤️', '✨', '🎈'];
+            const s = document.createElement('div');
+            s.classList.add('sakura');
+            s.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+            s.style.left = Math.random() * 100 + 'vw';
+            s.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            document.body.appendChild(s);
+            setTimeout(() => s.remove(), 5000);
+        }
+        setInterval(createSakura, 500);
+
+        // Login Logic
+        function checkLogin() {
+            const pass = document.getElementById('password').value;
+            if(pass === "22112025") {
+                const audio = document.getElementById('myAudio');
+                audio.play().catch(() => {
+                    // Penanganan auto-play policy browser mobile
+                    console.log("Audio play prevented, waiting for user interaction");
+                });
+                nextPage(2);
+                startCounters();
+            } else {
+                Swal.fire({
+                    title: 'Waduh!',
+                    text: 'Passwordnya salah, masa lupa hari spesial kita? 🥺',
+                    icon: 'error',
+                    confirmButtonColor: '#ff4d6d'
+                });
+            }
+        }
+
+        function nextPage(n) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('p'+n).classList.add('active');
+            window.scrollTo(0,0);
+        }
+
+        function startCounters() {
+            const start = new Date("2025-11-22T00:00:00");
+            setInterval(() => {
+                const now = new Date();
+                const diff = now - start;
+                const days = Math.floor(diff / (1000*60*60*24));
+                const target = document.getElementById('time-together');
+                if(target) target.innerText = `Kita sudah bersama selama ${days} hari ❤️`;
+            }, 1000);
+
+            const nextAnniv = new Date("2026-11-22T00:00:00");
+            setInterval(() => {
+                const now = new Date();
+                const diff = nextAnniv - now;
+                const d = Math.floor(diff / (1000*60*60*24));
+                const h = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+                const m = Math.floor((diff % (1000*60*60)) / (1000*60));
+                const targetCount = document.getElementById('countdown');
+                if(targetCount) targetCount.innerText = `${d} Hari ${h} Jam ${m} Menit`;
+            }, 1000);
+        }
+
+        function openMsg(txt) { Swal.fire({ text: txt, confirmButtonColor: '#ff4d6d' }); }
+        
+        function mood(m) {
+            let msg = m === 'Sedih' ? "Jangan sedih sayang, kan ada aku di sini buat kamu. ❤️" : "Ikut seneng kalau princess aku lagi bahagia! 😍";
+            Swal.fire({ title: `Mood: ${m}`, text: msg, icon: 'success', confirmButtonColor: '#ff4d6d' });
+        }
+
+        let currentFlip = 0;
+        function flipPage() {
+            const pages = [document.getElementById('book-p1'), document.getElementById('book-p2'), document.getElementById('book-p3'), document.getElementById('book-p4')];
+            if(currentFlip < pages.length) {
+                pages[currentFlip].classList.add('flipped');
+                currentFlip++;
+            } else {
+                nextPage(6);
+            }
+        }
+
+        function startPuzzle() {
+            Swal.fire({
+                title: 'Puzzle Waktu!',
+                text: 'Puzzle nya Error, Aqilnya pusing ngaturnya hehehe',
+                imageUrl: 'https://via.placeholder.com/200',
+                confirmButtonText: 'Selesai Susun!',
+                confirmButtonColor: '#ff4d6d'
+            }).then(() => {
+                Swal.fire({
+                    title: 'Yeeaaaay! 🎉',
+                    text: 'Hebat banget! Ada kejutan terakhir buat kamu...',
+                    icon: 'success',
+                    timer: 2000,
+                    showConfirmButton: false
+                });
+                setTimeout(() => nextPage(7), 2000);
+            });
+        }
+    </script>
+</body>
+</html>
