@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special for D'Luna Syahputri ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-pink: #ff85a1;
+            --soft-pink: #fbb1bd;
+            --dark-pink: #ff4d6d;
+            --bg-color: #fff0f3;
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            font-family: 'Quicksand', sans-serif;
+            background: var(--bg-color);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Sakura / Heart Rain Effect */
+        .sakura {
+            position: fixed; top: -10%;
+            color: var(--primary-pink);
+            font-size: 1.2rem;
+            z-index: 999;
+            user-select: none;
+            pointer-events: none;
+            animation: fall linear forwards;
+        }
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+
+        /* General Layout */
+        .page {
+            min-height: 100vh;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+        }
+        .active { display: flex; animation: fadeIn 1s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .btn {
+            background: var(--dark-pink); color: white; border: none;
+            padding: 12px 30px; border-radius: 25px; font-size: 1rem;
+            cursor: pointer; box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+            transition: 0.3s; margin-top: 15px; text-decoration: none;
+        }
+        .btn:hover { transform: scale(1.05); }
+
+        /* Slide 1: Login & Photo */
+        .profile-pic {
+            width: 150px; height: 150px; border-radius: 50%;
+            border: 5px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            object-fit: cover; margin-bottom: 20px;
+        }
+
+        /* Amplop Rahasia */
+        .envelope-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 20px 0; }
+        .envelope {
+            background: var(--primary-pink); color: white;
+            padding: 15px; border-radius: 10px; cursor: pointer;
+            transition: 0.3s; font-size: 1.5rem;
+        }
+        .envelope:hover { transform: translateY(-5px); background: var(--dark-pink); }
+
+        /* Wishlist Box */
+        .wishlist-box {
+            background: white; padding: 20px; border-radius: 15px;
+            width: 90%; max-width: 400px; text-align: left;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .wishlist-item { margin: 10px 0; display: flex; align-items: center; }
+        .wishlist-item input { margin-right: 10px; accent-color: var(--dark-pink); }
+
+        /* Mood Tracker */
+        .mood-btn { font-size: 2.5rem; cursor: pointer; transition: 0.3s; margin: 0 10px; }
+        .mood-btn:hover { transform: scale(1.2); }
+
+        /* Countdown */
+        #countdown { font-weight: bold; color: var(--dark-pink); font-size: 1.2rem; }
+
+        /* Photo Book */
+        .book-container { perspective: 1000px; width: 220px; height: 300px; position: relative; cursor: pointer; }
+        .page-book { width: 100%; height: 100%; position: absolute; transition: transform 1s; transform-origin: left; transform-style: preserve-3d; }
+        .page-book img { width: 100%; height: 100%; border-radius: 10px; object-fit: cover; border: 3px solid white; }
+        .flipped { transform: rotateY(-180deg); }
+
+        /* Slider */
+        .slider-container { display: flex; overflow-x: auto; gap: 10px; width: 100%; padding-bottom: 15px; scrollbar-width: none; }
+        .slider-container img { width: 180px; height: 240px; border-radius: 10px; flex-shrink: 0; object-fit: cover; }
+    </style>
+</head>
+<body>
+
+    <audio id="myAudio" loop>
+        <source src="https://www.mboxdrive.com/The%201975%20-%20About%20You.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="p1" class="page active">
+        <img src="https://via.placeholder.com/150" alt="Luna" class="profile-pic">
+        <h2 style="font-family: 'Pacifico'; color: var(--dark-pink);">Happy Birthday, Luna!</h2>
+        <div class="login-box">
+            <p>Masukkan tanggal jadian kita<br>(DDMMYYYY)</p>
+            <input type="text" id="password" placeholder="22112025" style="padding:10px; border-radius:10px; border:2px solid var(--soft-pink); text-align:center;">
+            <br>
+            <button class="btn" onclick="checkLogin()">Buka Hadiah ❤️</button>
+        </div>
+    </div>
+
+    <div id="p2" class="page">
+        <div style="background:white; padding:25px; border-radius:20px; max-width:500px; border-left: 8px solid var(--dark-pink);">
+            <div id="time-together" style="font-size: 0.8rem; color: #888; margin-bottom: 10px;"></div>
+            <h2 style="font-family: 'Dancing Script'; color: var(--dark-pink);">Untuk Tuan Putriku...</h2>
+            <p style="text-align: justify; font-size: 0.95rem; line-height: 1.6;">
+                Selamat ulang tahun ya <b>my princess</b>, hari ini adalah hari yang spesial banget buat kamu... (teks ucapan lengkap kamu) ... I Loveee youuu <b>Lunaaaaaa</b>. ❤️
+            </p>
+        </div>
+        <button class="btn" onclick="nextPage(3)">Lanjut ke Rahasia Kita &rarr;</button>
+    </div>
+
+    <div id="p3" class="page">
+        <h2 style="font-family: 'Dancing Script'; color: var(--dark-pink);">Alasan Aku Sayang Kamu</h2>
+        <div class="envelope-container">
+            <div class="envelope" onclick="openMsg('Kamu itu lucu banget kalau lagi ngambek!')">✉️</div>
+            <div class="envelope" onclick="openMsg('Sabar banget ngadepin sifat aku.')">✉️</div>
+            <div class="envelope" onclick="openMsg('Senyum kamu itu penyemangat aku.')">✉️</div>
+            <div class="envelope" onclick="openMsg('Cara kamu perhatiin hal-hal kecil.')">✉️</div>
+        </div>
+        <hr style="width: 50%; border: 0.5px solid var(--soft-pink); margin: 20px 0;">
+        <p>Gimana perasaan kamu hari ini?</p>
+        <div class="mood-container">
+            <span class="mood-btn" onclick="mood('Senang')">😊</span>
+            <span class="mood-btn" onclick="mood('Sedih')">😢</span>
+            <span class="mood-btn" onclick="mood('Kangen')">😍</span>
+        </div>
+        <button class="btn" onclick="nextPage(4)">Momen Terindah &rarr;</button>
+    </div>
+
+    <div id="p4" class="page">
+        <h2 style="font-family: 'Pacifico';">Momen Terindah Kita</h2>
+        <div class="slider-container">
+            <img src="https://via.placeholder.com/180x240?text=Foto+1">
+            <img src="https://via.placeholder.com/180x240?text=Foto+2">
+            <img src="https://via.placeholder.com/180x240?text=Foto+3">
+            <img src="https://via.placeholder.com/180x240?text=Foto+4">
+            <img src="https://via.placeholder.com/180x240?text=Foto+5">
+            <img src="https://via.placeholder.com/180x240?text=Foto+6">
+        </div>
+        <button class="btn" onclick="nextPage(5)">Buka Album Buku &rarr;</button>
+    </div>
+
+    <div id="p5" class="page">
+        <div class="book-container" onclick="flipPage()">
+            <div class="page-book" id="book-p4"><img src="https://via.placeholder.com/220x300?text=Akhir"></div>
+            <div class="page-book" id="book-p3"><img src="https://via.placeholder.com/220x300?text=Foto+3"></div>
+            <div class="page-book" id="book-p2"><img src="https://via.placeholder.com/220x300?text=Foto+2"></div>
+            <div class="page-book" id="book-p1"><img src="https://via.placeholder.com/220x300?text=Foto+1"></div>
+        </div>
+        <p style="margin-top:20px;">Klik untuk buka halamannya!</p>
+    </div>
+
+    <div id="p6" class="page">
+        <h2 style="font-family: 'Dancing Script';">Our Future Goals</h2>
+        <div class="wishlist-box">
+            <div class="wishlist-item"><input type="checkbox"> Nonton konser bareng Luna</div>
+            <div class="wishlist-item"><input type="checkbox"> Makan es krim di pinggir pantai</div>
+            <div class="wishlist-item"><input type="checkbox"> Keliling kota malem-malem</div>
+            <div class="wishlist-item"><input type="checkbox"> Rayain ultah bareng selamanya</div>
+        </div>
+        <p>Main puzzle bentar yuk!</p>
+        <button class="btn" onclick="startPuzzle()">Mulai Puzzle</button>
+    </div>
+
+    <div id="p7" class="page">
+        <h2 style="font-family: 'Pacifico'; color: var(--dark-pink);">Countdown to Next Anniversary</h2>
+        <div id="countdown"></div>
+        <h1 style="font-family: 'Dancing Script'; font-size: 2.5rem; margin-top:30px;">
+            Selamattt ulangg tahunnn sayanggg, I Loveee youuuuuu.
+        </h1>
+        <a href="https://wa.me/089521626891?text=Makasih%20sayang%20udah%20buat%20websitenya!%20I%20Love%20You%20Too!" class="btn" style="background: #25d366;">
+            <i class="fab fa-whatsapp"></i> Chat Aku di WhatsApp
+        </a>
+    </div>
+
+    <script>
+        // Sakura Effect
+        function createSakura() {
+            const icons = ['🌸', '❤️', '✨', '☁️'];
+            const s = document.createElement('div');
+            s.classList.add('sakura');
+            s.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+            s.style.left = Math.random() * 100 + 'vw';
+            s.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            s.style.opacity = Math.random();
+            document.body.appendChild(s);
+            setTimeout(() => s.remove(), 5000);
+        }
+        setInterval(createSakura, 300);
+
+        // Login Logic
+        function checkLogin() {
+            const pass = document.getElementById('password').value;
+            if(pass === "22112025") {
+                document.getElementById('myAudio').play();
+                nextPage(2);
+                startCounters();
+            } else {
+                Swal.fire({
+                    title: 'Salah Nalu!',
+                    text: 'Masa lupa sama hari spesial kita berdua, parah banget si!',
+                    icon: 'error',
+                    confirmButtonColor: '#ff4d6d'
+                });
+            }
+        }
+
+        function nextPage(n) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('p'+n).classList.add('active');
+        }
+
+        // Counters
+        function startCounters() {
+            // How long together
+            const start = new Date("2025-11-22T00:00:00");
+            setInterval(() => {
+                const now = new Date();
+                const diff = now - start;
+                const days = Math.floor(diff / (1000*60*60*24));
+                document.getElementById('time-together').innerText = `Kita sudah bersama selama ${days} hari ❤️`;
+            }, 1000);
+
+            // Countdown to next anniv
+            const nextAnniv = new Date("2026-11-22T00:00:00");
+            setInterval(() => {
+                const now = new Date();
+                const diff = nextAnniv - now;
+                const d = Math.floor(diff / (1000*60*60*24));
+                const h = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+                document.getElementById('countdown').innerText = `${d} Hari ${h} Jam menuju Anniversary!`;
+            }, 1000);
+        }
+
+        // Mood & Envelope
+        function openMsg(txt) { Swal.fire({ text: txt, confirmButtonColor: '#ff4d6d' }); }
+        function mood(m) {
+            let msg = m === 'Sedih' ? "Hey, jangan sedih dong princessnya aku. Sini peluk! 🤗" : "Aku ikut seneng kalau kamu seneng! 😍";
+            Swal.fire({ title: `Mood: ${m}`, text: msg, icon: 'info' });
+        }
+
+        // Book Logic
+        let currentFlip = 0;
+        function flipPage() {
+            const pages = [document.getElementById('book-p1'), document.getElementById('book-p2'), document.getElementById('book-p3'), document.getElementById('book-p4')];
+            if(currentFlip < pages.length) {
+                pages[currentFlip].classList.add('flipped');
+                currentFlip++;
+            } else {
+                nextPage(6);
+            }
+        }
+
+        // Simple Puzzle Success
+        function startPuzzle() {
+            Swal.fire({
+                title: 'Susun Puzzle!',
+                text: 'Klik tombol di bawah jika kamu sudah siap!',
+                imageUrl: 'https://via.placeholder.com/200',
+                confirmButtonText: 'Selesai!',
+            }).then(() => {
+                Swal.fire({ title: 'Hooray!', text: 'Pintar banget sih kesayangan aku!', icon: 'success' });
+                nextPage(7);
+            });
+        }
+    </script>
+</body>
+</html>
